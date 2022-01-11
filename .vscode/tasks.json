@@ -1,0 +1,75 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "copy compile_commands.json",
+            "type": "shell",
+            "command": "cp builddir/compile_commands.json ${workspaceFolder}",
+            "problemMatcher": []
+        },
+        {
+            "label": "build C++ Project",
+            "type": "shell",
+            "command": "meson compile",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceRoot}/builddir"
+            }
+        },
+        {
+            "label": "build C# library",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "publish",
+                // shared library
+                "/p:NativeLib=Shared",
+                // self contained
+                "/p:SelfContained=true",
+                // runtime [win-x64, linux-x64, osx-x64]
+                // "-r ${runtime}",
+                // release
+                //"-c release"
+            ],
+            // set workign directory
+            "options": {
+                "cwd": "${workspaceRoot}/DotNetLib"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile",
+            "windows": {
+                "args": [
+                    "publish",
+                    // shared library
+                    "/p:NativeLib=Shared",
+                    // self contained
+                    "/p:SelfContained=true",
+                    // runtime [win-x64, linux-x64, osx-x64]
+                    "-r",
+                    "win-x64",
+                    // release
+                    //"-c release"
+                ],
+            },
+            "linux": {
+                "args": [
+                    "publish",
+                    // shared library
+                    "/p:NativeLib=Shared",
+                    // self contained
+                    "/p:SelfContained=true",
+                    // runtime [win-x64, linux-x64, osx-x64]
+                    "-r",
+                    "linux-x64",
+                    // release
+                    //"-c release"
+                ],
+            }
+        }
+    ]
+}
