@@ -26,7 +26,7 @@
 
 # Cpp steps
 - make and build the native executable  
-  ``sh
+  ```sh
   meson builddir
   meson compile -C builddir
   ```
