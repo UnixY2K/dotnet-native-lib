@@ -1,5 +1,7 @@
 # .NET Library for Native Apps
 
+> dotnet AOT support is now out, this project will be archived as it is now officially suported
+
 # Steps from scratch
 
 - Create a new project
